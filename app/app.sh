@@ -22,4 +22,6 @@ bash prepare_data.sh
 bash index.sh 
 
 # Run the ranker
-bash search.sh "girl"
+bash search.sh "school"
+bash search.sh "Australia"
+bash search.sh "hockey player"
