@@ -26,10 +26,8 @@ for term in query_terms:
     for row in session.execute("SELECT doc_id, tf FROM term_frequency WHERE term=%s", (term,)):
         tf[row.doc_id][term] = row.tf
 
-def bm25(tf_val, df_val, dl, k1=1.5, b=0.75):
-    idf = math.log((N - df_val + 0.5) / (df_val + 0.5) + 1)
-    denom = tf_val + k1 * (1 - b + b * dl / avg_len)
-    return idf * ((tf_val * (k1 + 1)) / denom)
+def bm25(tf_val, df_val, dl, k1=1, b=0.75):
+    return math.log(N / df_val) * ((tf_val * (k1 + 1)) / (tf_val + k1 * (1 - b + b * dl / avg_len)))
 
 results = [
     (doc_id, sum(
